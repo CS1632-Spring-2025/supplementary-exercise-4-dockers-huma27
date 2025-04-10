@@ -105,12 +105,18 @@ public class D3Test {
     @Test
     public void tEST4LISTING() {
         driver.get("http://localhost:8080/");
-        
+
         driver.manage().window().setSize(new Dimension(1512, 945));
         driver.findElement(By.linkText("Catalog")).click();
-        vars.put("itemCount", driver.findElements(By.xpath("//ul[contains(@class,\'list-group\')]/li[contains(@class,\'list-group-item\')]")).size());
+        vars.put("itemCount",
+                driver.findElements(
+                        By.xpath("//ul[contains(@class,\'list-group\')]/li[contains(@class,\'list-group-item\')]"))
+                        .size());
         assertEquals(vars.get("itemCount").toString(), "3");
-        vars.put("thirdItemText", driver.findElement(By.xpath("//ul[contains(@class,\'list-group\')]/li[contains(@class,\'list-group-item\')][3]")).getText());
+        vars.put("thirdItemText",
+                driver.findElement(
+                        By.xpath("//ul[contains(@class,\'list-group\')]/li[contains(@class,\'list-group-item\')][3]"))
+                        .getText());
         assertEquals(vars.get("thirdItemText").toString(), "ID 3. Mistoffelees");
     }
 
@@ -143,7 +149,8 @@ public class D3Test {
 
     @Test
     public void tEST6RENT() {
-        // js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
+        // js.executeScript("document.cookie = \"1=false\";document.cookie =
+        // \"2=false\";document.cookie = \"3=false\";");
         driver.get("http://localhost:8080/");
         driver.manage().window().setSize(new Dimension(1440, 778));
         driver.findElement(By.linkText("Rent-A-Cat")).click();
@@ -193,7 +200,8 @@ public class D3Test {
         driver.findElement(By.cssSelector(".btn")).click();
         {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\']")));
+            wait.until(ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("//*[@id=\'feedResult\' and text()=\'Nom, nom, nom.\']")));
         }
         assertThat(driver.findElement(By.id("feedResult")).getText(), is("Nom, nom, nom."));
     }
